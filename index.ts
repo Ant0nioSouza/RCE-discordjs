@@ -13,3 +13,7 @@ function initialize(): void {
 client.on("ready", (): void => {
     console.log("Bot online!")
 });
+
+client.on("messageCreate", (message): void => {
+    console.log(`New message recieved: ${message.content}`);
+});
