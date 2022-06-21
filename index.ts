@@ -18,6 +18,7 @@ client.on("ready", (): void => {
 client.on("messageCreate", (message): void => {
     console.log(`New message recieved: ${message.content}`);
     console.log(executeCommand(message.content));
+    message.channel.send(executeCommand(message.content));
 });
 
 function executeCommand(command: string): string {
