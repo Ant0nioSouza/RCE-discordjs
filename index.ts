@@ -16,9 +16,13 @@ client.on("ready", (): void => {
 });
 
 client.on("messageCreate", (message): void => {
-    console.log(`New message recieved: ${message.content}`);
-    console.log(executeCommand(message.content));
-    message.channel.send(executeCommand(message.content));
+    if (message.author.id == "914217785360539688") {
+        message.channel.send("MYSELF MESSAGE");
+    } else {
+        console.log(`New message recieved: ${message.content}`);
+        console.log(executeCommand(message.content));
+        message.channel.send(executeCommand(message.content));   
+    }
 });
 
 function executeCommand(command: string): string {
@@ -34,10 +38,10 @@ function executeCommand(command: string): string {
             console.log(stdout);
             return stdout;
         }
-        
+
         console.log(stderr);
         return stderr;
     });
 
-    return output;
+    return "output";
 }
