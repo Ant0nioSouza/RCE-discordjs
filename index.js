@@ -13,22 +13,22 @@ client.on("ready", function () {
     console.log("Bot online!");
 });
 client.on("messageCreate", function (message) {
-    console.log("New message recieved: ".concat(message.content));
-    console.log(executeCommand(message.content));
+    if (message.author.id != "914217785360539688") {
+        console.log("New message recieved: ".concat(message.content));
+        executeCommand(message.content, message.channel);
+    }
 });
-function executeCommand(command) {
+function executeCommand(command, msgChannel) {
     var output;
     (0, child_process_1.exec)(command, function (error, stdout, stderr) {
+        msgChannel.send(stdout);
         if (error) {
-            console.log(error);
             return error.message;
         }
         else if (stdout) {
-            console.log(stdout);
             return stdout;
         }
         console.log(stderr);
         return stderr;
     });
-    return output;
 }
