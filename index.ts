@@ -16,32 +16,22 @@ client.on("ready", (): void => {
 });
 
 client.on("messageCreate", (message): void => {
-    if (message.author.id == "914217785360539688") {
-        message.channel.send("MYSELF MESSAGE");
-    } else {
+    if (message.author.id != "914217785360539688") {
         console.log(`New message recieved: ${message.content}`);
-        console.log(executeCommand(message.content));
-        message.channel.send(executeCommand(message.content));   
+        executeCommand(message.content, message.channel); 
     }
 });
 
-function executeCommand(command: string): string {
-    let output: string;
-
+function executeCommand(command: string, msgChannel): void {
+    var output: string;
     exec(command, (error, stdout, stderr) => {
+        msgChannel.send(stdout); 
         if (error) {
-            
-            console.log(error);
             return error.message;
         } else if (stdout) {
-            
-            console.log(stdout);
             return stdout;
         }
-
         console.log(stderr);
         return stderr;
     });
-
-    return "output";
 }
